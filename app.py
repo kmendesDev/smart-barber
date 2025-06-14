@@ -25,9 +25,10 @@ def load_css():
 
 load_css()
 
+cred = credentials.Certificate(dict(st.secrets["FIREBASE"]))
+
 # Inicializa Firebase
 if not firebase_admin._apps:
-    cred = credentials.Certificate("smart-barber-firebase.json")
     firebase_admin.initialize_app(cred)
 
 db = firestore.client()
