@@ -13,7 +13,7 @@ def clientes_page(db):
         email = st.text_input("Email")
         telefone = st.text_input("Telefone")
         nascimento = st.date_input("Data de nascimento", value=date(2000, 1, 1), format="DD/MM/YYYY")
-        qtd_cortes = st.number_input("Quantidade de cortes já realizados", min_value=0, step=1)
+       # qtd_cortes = st.number_input("Quantidade de cortes já realizados", min_value=0, step=1)
 
         if st.button("Cadastrar cliente"):
             if nome and email:
@@ -23,11 +23,11 @@ def clientes_page(db):
                     "nome": nome,
                     "email": email,
                     "telefone": telefone,
-                    "nascimento": nascimento.strftime("%Y-%m-%d"),
-                    "qtd_cortes": qtd_cortes
+                    "nascimento": nascimento.strftime("%Y-%m-%d")
+             #       "qtd_cortes": qtd_cortes
                 })
                 st.success("Cliente cadastrado com sucesso!")
-                st.experimental_rerun()
+                st.rerun()
             else:
                 st.warning("Preencha nome e email.")
 

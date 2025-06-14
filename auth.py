@@ -58,7 +58,7 @@ def login_form(db):
             if data.get("senha_hash") == senha_hash:
                 st.session_state["user"] = data["id"]
                 st.session_state["barbearia_nome"] = data["nome"]
-                st.success(f"Login bem-sucedido! Bem-vindo(a), {data['nome']}")
+                st.rerun()
             else:
                 st.error("Senha incorreta.")
         else:

@@ -10,6 +10,21 @@ from barbeiros import barbeiros_page
 from agendamentos import agendamentos_page
 from aniversariantes import aniversariantes_page
 
+# Configuração do layout da página
+st.set_page_config(
+    page_title="Smart Barber 💈",
+    page_icon="💈",
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
+
+# Função para carregar CSS customizado
+def load_css():
+    with open("style.css") as f:
+        st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+
+load_css()
+
 # Inicializa Firebase
 if not firebase_admin._apps:
     cred = credentials.Certificate("smart-barber-firebase.json")
@@ -24,7 +39,7 @@ if "user" not in st.session_state:
 st.sidebar.title("Bem-vindo!")
 
 if st.session_state["user"]:
-    st.sidebar.markdown(f"Logado como: **{st.session_state['barbearia_nome']}**")
+    st.sidebar.markdown(f"Logado como: **{st.session_state.get('barbearia_nome', '')}**")
     if st.sidebar.button("Sair"):
         st.session_state["user"] = None
         st.session_state["barbearia_nome"] = None
@@ -32,7 +47,7 @@ if st.session_state["user"]:
 
     # Navegação principal
     pagina = st.sidebar.selectbox("Navegar para", [
-        "Dashboard","Realizar Serviço","Clientes", "Barbeiros", "Agendamentos", "Aniversariantes"
+        "Dashboard", "Realizar Serviço", "Clientes", "Barbeiros", "Agendamentos", "Aniversariantes"
     ])
 
     if pagina == "Dashboard":
